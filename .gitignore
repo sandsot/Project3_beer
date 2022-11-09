@@ -3,3 +3,4 @@ __pycache__
 README.md
 requirements.txt
 db.sqlite3
+migrations
