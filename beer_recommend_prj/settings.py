@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-g&g3wbp=_!f@w19d*#5&)0t80el8yh&=yy#t8s6s$k^(983+*n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'a4c5-121-159-54-81.jp.ngrok.io', '127.0.0.1']
 
 
 # Application definition
@@ -47,6 +47,10 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_bootstrap5",
+    "django.extensions",
+    "debug_toolbar",
+    "accounts",
 ]
 
 ROOT_URLCONF = "beer_recommend_prj.urls"
