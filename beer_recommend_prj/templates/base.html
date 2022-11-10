@@ -16,15 +16,16 @@
         </a>
 
         <ul class="nav nav-pills">
-            <li class="nav-item"><a href="/blog/" class="nav-link">Recommend</a></li>
-            <li class="nav-item"><a href="/diary/" class="nav-link">Column</a></li>
+            <li class="nav-item"><a href="/recommend/" class="nav-link">Recommend</a></li>
+            <li class="nav-item"><a href="/column/" class="nav-link">Column</a></li>
+            <li class="nav-item"><a href="/event/" class="nav-link">Event</a></li>
 
         {% if user.is_authenticated %}
-            <li class="nav-item"><a href="/accounts/signup/" class="nav-link">signup</a></li>
-            <li class="nav-item"><a href="/accounts/login/" class="nav-link">login</a></li>
+            <li class="nav-item"><a href="/account/signup/" class="nav-link">signup</a></li>
+            <li class="nav-item"><a href="/account/login/" class="nav-link">login</a></li>
         {% else %}
-            <li class="nav-item"><a href="/accounts/logout/" class="nav-link">logout</a></li>
-            <li class="nav-item"><a href="/accounts/profile/" class="nav-link">profile</a></li>
+            <li class="nav-item"><a href="/account/logout/" class="nav-link">logout</a></li>
+            <li class="nav-item"><a href="/account/profile/" class="nav-link">My Page</a></li>
         {% endif %}
         </ul>
     </header>
