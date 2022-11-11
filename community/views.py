@@ -1,77 +1,80 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from community.models import Memory
+from community.models import Column, Event
+from community.forms import ColumnForm
+from community.event_form import EventForm
 from django.views.generic import CreateView
-from community.forms import CommunityForm
 
 
-def community_list(request):
-    posts = Memory.objects.all().order_by('-pk')
+def column(request):
+    posts = Column.objects.all().order_by('-pk')
     return render(
         request,
-        'community/column.html',
+        'community/column_index.html',
         {
-            'posts': posts,
+            'post_list': posts,
         }
     )
 
 
-def column_detail(request, pk):
-    post = Memory.objects.get(pk=pk)
+def column_new(request, pk):
+    post = Column.objects.get(pk=pk)
 
     return render(
         request,
-        'community/column_detail.html',
+        'community/column_new.html',
         {
             'post': post,
         }
     )
 
 
-def column_new(request):
+def column_form(request):
     if request.method == "GET":
-        form = CommunityForm()
+        form = ColumnForm()
     else:
-        form = CommunityForm(request.POST)
+        form = ColumnForm(request.POST)
         if form.is_valid():
             post = form.save()
-            messages.success(request, "메모리 생성")
             return redirect(post)
             # return redirect(f"/diary/{post.pk}/")
 
-    return render(request, "community/column_new.html", {
+    return render(request, "community/column_form.html", {
         "form": form,
     })
 
+def event_index(request):
+    event = Event.objects.all().order_by('-pk')
+    return render(request, "community/event_index.html",
+                  {'event_qs': event,
+    })
 
-def memory_edit(request, pk):
-    memory = Memory.objects.get(pk=pk)
-
-    if request.method == "POST":
-        form = CommunityForm(request.POST, instance=memory)
-        if form.is_valid():
-            # form.cleaned_data
-            memory = form.save()
-            messages.success(request, "메모리를 저장했습니다.")
-            # return redirect(f"/diary/{memory.pk}/")
-            # return redirect(memory.get_absolute_url())
-            return redirect(memory)
+def event_new(request):
+    # print("request.method =", request.method)
+    # print("request.POST =", request.POST)
+    if request.method == 'GET':
+        form = EventForm()
     else:
-        form = CommunityForm(instance=memory)
-    return render(request, "community/column_new.html", {
-        "form": form,
-    })
+        form = EventForm(request.POST)
+        if form.is_valid():
+            # 유효성 검사에 통과한 값들이 저장된 dict
+            # form.cleaned_data
+            post = form.save() # ModelForm에서 지원
+            # return redirect("/blog/")
+            # return redirect(f'/blog/{post.pk}/")
+            # return redirect(post.get_absolute_url())
+            return redirect(post)
+    return render(request, "community/event_form.html",{
+        "form": form
+        })
 
+def event_post_page(request, pk):
+    event = Event.objects.get(pk=pk)
 
-def memory_delete(request, pk):
-    memory = Memory.objects.get(pk=pk)
-    # TODO: delete memory
-    # delete memory
-    if request.method == "POST":
+    if request.method == 'POST':
         memory.delete()
-        messages.success(request, "메모리를 삭제했습니다.")
-        return redirect("/diary/")
+        return redirect("/event/")
 
-    return render(request, "diary/memory_comfirm_delete.html", {
-        'memory': memory,
-    })
+    return render(request, "community/event_new.html",{
+        "event_qs": event,
+        })

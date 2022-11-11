@@ -23,7 +23,7 @@ def root(request):
 urlpatterns = [
     path('', root),
     path('account/', include('account.urls')),  # blog.urls에 있는 주소 앞에 blog/를 한 번에 붙이자.
-    path('search/', include('search.urls')),
     path('community/', include('community.urls')),
+    path('search/', include('search.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

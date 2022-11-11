@@ -2,7 +2,7 @@ from django.db import models
 
 from django.core.validators import MaxValueValidator
 
-class Community(models.Model):
+class Column(models.Model):
     """맛집"""
     name = models.CharField(max_length=100)
     description = models.TextField()
@@ -12,7 +12,7 @@ class Community(models.Model):
     )
 
 # Post Model
-class Post(models.Model):
+class Event(models.Model):
     title = models.CharField(max_length=30)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
