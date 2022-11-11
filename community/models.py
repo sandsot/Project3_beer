@@ -2,14 +2,12 @@ from django.db import models
 
 from django.core.validators import MaxValueValidator
 
-class Column(models.Model):
-    """맛집"""
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    average_score = models.PositiveSmallIntegerField(
-        validators=[
-            MaxValueValidator(5),]
-    )
+class Community(models.Model):
+    title = models.CharField(max_length=30)
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 
 # Post Model
 class Event(models.Model):
@@ -24,3 +22,4 @@ class Event(models.Model):
 
     def __str__(self):
         return f"[{self.pk}] {self.title}"
+
