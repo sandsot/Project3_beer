@@ -9,9 +9,9 @@
 <body>
     <h1>Event</h1>
 
-    {% for event in event_qs %}
+    {% for eve in event_qs %}
         <h2>
-             <a href="{{ res.get_absolute_url }}">
+             <a href="{{ eve.get_absolute_url }}">
              </a>
              <a href="/event/{{ eve.pk }}/">
                 {{ eve.name }}
