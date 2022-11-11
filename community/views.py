@@ -1,13 +1,13 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from community.models import Community, Event
+from community.models import Column, Event
 from community.forms import ColumnForm
 from community.event_form import EventForm
 from django.views.generic import CreateView
 
 
 def column(request):
-    posts = Community.objects.all().order_by('-pk')
+    posts = Column.objects.all().order_by('-pk')
     return render(
         request,
         'community/column_index.html',
@@ -18,7 +18,7 @@ def column(request):
 
 
 def column_new(request, pk):
-    post = Community.objects.get(pk=pk)
+    post = Column.objects.get(pk=pk)
 
     return render(
         request,

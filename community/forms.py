@@ -1,7 +1,7 @@
 from django import forms
-from community.models import Community
+from community.models import Column
 
-class Column(forms.ModelForm):
+class ColumnForm(forms.ModelForm):
     class Meta:
-        model = Community
+        model = Column
         fields = "__all__"
